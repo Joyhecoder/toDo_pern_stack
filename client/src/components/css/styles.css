@@ -1,0 +1,69 @@
+/* styles for Register component */
+.register-body {
+    background-color:#6b9080;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+
+   
+}
+
+.register-container {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    width: 80%;
+    /* border: red solid 5px; */
+    display: flex;
+    box-shadow: 0 0 10px #f6fff8;
+ 
+}
+.login-form {
+    width: 50%;
+    background-color: white;
+    text-align: center;
+    padding: 15px;
+    position:relative;
+}
+
+form {
+    width: 80%;
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    
+}
+
+.picture-container {
+    width: 50%;
+    background-color: #fff;
+    background: #a4c3b2;
+    position: relative;
+}
+
+.register-pic {
+    /* object-fit: cover; */
+    width: 100%;
+}
+
+.toDo-pic {
+    width: 30%;
+    position: absolute;
+    left: 35%;
+    right: 25%;
+    top: 30%;
+}
+
+/*for smaller screen, only display the login form*/
+@media (min-width: 320px) and (max-width: 767px) {
+    .picture-container {
+        display: none;
+    }
+    .login-form {
+        width: 100%;
+    }
+}
