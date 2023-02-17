@@ -5,7 +5,7 @@ const InputTodo = () => {
     console.log(description)
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const body = { description }
 
