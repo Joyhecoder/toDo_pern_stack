@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Table from 'react-bootstrap/Table';
+import EditTodo from './EditTodo'
 
 const ListTodos = () => {
 
@@ -13,10 +14,7 @@ const ListTodos = () => {
 
     const getAllTodo = async () => {
         const response = await fetch('http://localhost:5000/todos')
-        // const response = await fetch('http://localhost:5000/todos',{
-        //     method: "GET",
-        //     headers: {"Content-Type": "application/json"}
-        // })
+      
         const data = await response.json()
         // console.log(data)
         setToDoArray(data)
@@ -31,8 +29,7 @@ const ListTodos = () => {
             console.log(e.target.value)
             let id = e.target.value
             const response = await fetch(`http://localhost:5000/todos/${id}`, {
-                method: "DELETE",
-                headers: {"Content-Type": "application/json"}
+                method: "DELETE"
             })
             console.log(response)
             await getAllTodo()
@@ -63,7 +60,7 @@ const ListTodos = () => {
         return (
         <tr key={todo.todo_id}>
           <td>{todo.description}</td>
-          <td>Otto</td>
+          <td><EditTodo todo={todo} /></td>
           <td> <th><button className='btn btn-danger' value={todo.todo_id} onClick={(e)=>handleDelete(e)}>Delete</button></th></td>
         </tr>
         )
