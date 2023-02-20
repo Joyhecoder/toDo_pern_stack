@@ -1,7 +1,33 @@
 import React, {useState} from 'react'
 import '../css/styles.css'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const [fName, setFName] = useState('')
+  const [lName, setLName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  console.log(fName, lName)
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const body = { fName, lName, email, password }
+      let response = await fetch('http://localhost:5000/register', {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(body)
+      })
+      console.log(response);
+      navigate('/login')
+
+    } catch (error) {
+      console.error(error.message)
+    }
+   
+  }
   return (
     <div className='register-body'>
       <div className="register-container">
@@ -14,11 +40,13 @@ const Register = () => {
                 type="text"
                 className="form-control"
                 placeholder="First name"
+                value={fName}
+                onChange={e=>setFName(e.target.value)}
               />
             </div>
             <div className="mb-3">
               <label>Last name</label>
-              <input type="text" className="form-control" placeholder="Last name" />
+              <input type="text" className="form-control" placeholder="Last name" value={lName} onChange={e => setLName(e.target.value)} />
             </div>
             <div className="mb-3">
               <label>Email address</label>
@@ -26,6 +54,7 @@ const Register = () => {
                 type="email"
                 className="form-control"
                 placeholder="Enter email"
+                value={email} onChange={e=>setEmail(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -34,15 +63,17 @@ const Register = () => {
                 type="password"
                 className="form-control"
                 placeholder="Enter password"
+                value={password}
+                onChange={e=>setPassword(e.target.value)}
               />
             </div>
             <div className="d-grid">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-warning" onClick={(e)=>handleSubmit(e)}>
                 Sign Up
               </button>
             </div>
             <p className="forgot-password text-right">
-              Already registered <a href="/login">sign in?</a>
+              Already registered <a href="/login" >sign in?</a>
             </p>
           </form>
         </div>

@@ -87,7 +87,8 @@ app.post("/register", async (req, res) => {
     try{
         //check to see if user is already in db
         let records = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]) //[{},{}]
-        if(records.length !== 0){
+        console.log(records.rows, "register route");
+        if(records.rows.length !== 0){
             //email is registered in db, so send back an error message to react
             return res.status(422).json({error: "Email already exists"})
         }else{
