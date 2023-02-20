@@ -79,6 +79,30 @@ app.delete('/todos/:id', async (req, res) => {
     }
 })
 
+//register routes
+//create an account
+app.post("/register", async (req, res) => {
+    const { fName, lName, email, password } = req.body
+
+    try{
+        //check to see if user is already in db
+        let records = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]) //[{},{}]
+        if(records.length !== 0){
+            //email is registered in db, so send back an error message to react
+            return res.status(422).json({error: "Email already exists"})
+        }else{
+            //create an account
+            const newAccount = await pool.query(`INSERT INTO users (fname, lname, email, password) VALUES ($1, $2, $3, $4) RETURNING *`, [fName, lName, email, password]);
+
+            res.json(newAccount.rows[0])
+        }
+
+        
+    }catch(error){
+        console.error(error.message);
+    }
+})
+
 app.listen(port, () => {
     console.log(`Server is starting on port ${port}`)
 })
