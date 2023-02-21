@@ -3,6 +3,7 @@ const app = express()
 const port = 5000
 const cors = require("cors")
 const pool = require("./db")
+const e = require('express')
 
 //middleware, this allows frontend and backend to interact with each other
 //localhost 3000 and 5000
@@ -79,7 +80,7 @@ app.delete('/todos/:id', async (req, res) => {
     }
 })
 
-//register routes
+//!register routes
 //create an account
 app.post("/register", async (req, res) => {
     const { fName, lName, email, password } = req.body
@@ -103,6 +104,40 @@ app.post("/register", async (req, res) => {
         console.error(error.message);
     }
 })
+
+//check an account
+app.post("/login", async (req, res) => {
+    //1. destructure the req.body
+    const { email, password } = req.body
+    console.log("password from body", password);
+
+    try {
+        const response = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+       
+        console.log("response:", response.rows[0]);
+        console.log("password:", response.rows[0].password);
+        //2. check if user doesn't exist (if not then we throw error)
+        if(response.rows[0] == undefined){
+            return res.status(401).json("Password or Email is incorrect")
+        }
+        //3. check if incoming password is the same the database password
+        else if(response.rows[0].password == password){
+           
+            console.log("login successfully")
+            res.json(response)
+        }else{
+            console.log("login credential incorrect!")
+            return res.status(401).json("Password or Email is incorrect")
+            
+        }
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+
+//register and login routes
+// app.use("/auth", require("./routes/jwtAuth"))
 
 app.listen(port, () => {
     console.log(`Server is starting on port ${port}`)

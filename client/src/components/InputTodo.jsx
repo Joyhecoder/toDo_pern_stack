@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import './css/styles.css';
 
 const InputTodo = () => {
     const [description, setDescription] = useState('');
@@ -23,15 +24,15 @@ const InputTodo = () => {
 
     }
   return (
-    <>
+    <div className='inputTodo-container'>
         <h1 className='text-center my-5'>Input to do</h1>
-        <form action="" className='d-flex' onSubmit={handleSubmit}>
+        <form action="" className='d-flex todo-input' onSubmit={(e)=>handleSubmit(e)}>
             <input type="text" placeholder='add todo' className="form-control" value={description} onChange={e=>setDescription(e.target.value)} />
             <button className='btn btn-success'>Add</button>
 
         </form>
     
-    </>
+    </div>
   )
 }
 

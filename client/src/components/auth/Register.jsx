@@ -31,7 +31,7 @@ const Register = () => {
   return (
     <div className='register-body'>
       <div className="register-container">
-        <div className="login-form">
+        <div className="register-form">
           <form>
             <h3>Sign Up</h3>
             <div className="mb-3">
