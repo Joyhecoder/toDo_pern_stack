@@ -20,12 +20,21 @@
     box-shadow: 0 0 10px #f6fff8;
  
 }
-.login-form {
+.register-form {
     width: 50%;
     background-color: white;
     text-align: center;
     padding: 15px;
     position:relative;
+}
+
+.login-form{
+    width: 50%;
+    background: #a4c3b2;
+    text-align: center;
+    position: relative;
+
+
 }
 
 form {
@@ -40,9 +49,15 @@ form {
 
 .picture-container {
     width: 50%;
-    background-color: #fff;
+    /* background-color: #fff; */
     background: #a4c3b2;
     position: relative;
+}
+.picture-container2 {
+    width: 50%;
+    background: white;
+    position: relative;
+    padding-top: 15%;
 }
 
 .register-pic {
@@ -63,7 +78,25 @@ form {
     .picture-container {
         display: none;
     }
+    .picture-container2 {
+        display: none;
+    }
+
     .login-form {
         width: 100%;
     }
 }
+
+.inputTodo-container{
+    display: flex;
+    flex-direction: column;
+  
+}
+
+
+.todo-input {
+    height: 5%;
+    margin-top: 8%;
+    
+}
+
