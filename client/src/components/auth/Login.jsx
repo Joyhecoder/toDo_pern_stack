@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../css/styles.css'
 import { useNavigate } from 'react-router-dom'
 
@@ -6,8 +6,17 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [loginErr, setLoginErr] = useState()
+  console.log(loginErr);
+
+useEffect(() => {
+  setLoginErr()
+}, [email, password])
+
+
+
   const navigate = useNavigate()
-  console.log(email, password)
+  // console.log(email, password)
   const handleSubmit = async (e) =>{
     e.preventDefault();
     const body = { email, password }
@@ -18,8 +27,14 @@ const Login = () => {
         body: JSON.stringify(body)
       })
       console.log("login response", response);
+      if(response.status === 200){
+        navigate('/')
+      }else{
+        setLoginErr(true)
+        // console.log(loginErr)
+      }
     } catch (error) {
-      console.error(error.message)
+      console.log(error);
     }
     
   }
@@ -58,6 +73,13 @@ const Login = () => {
             </p>
             
           </form>
+          {loginErr ? 
+          <div className="loginErr">
+            <h6>Login incorrect!</h6>
+          </div>
+          
+          :
+          <></>}
         </div>
 
         <div className="picture-container2">

@@ -1,9 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './css/styles.css';
 
 const InputTodo = () => {
     const [description, setDescription] = useState('');
     console.log(description)
+
+
+
 
     const handleSubmit = async (e) => {
         // e.preventDefault();
