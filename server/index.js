@@ -108,23 +108,26 @@ app.post("/register", async (req, res) => {
 //check an account
 app.post("/login", async (req, res) => {
     //1. destructure the req.body
+    console.log(req.body);
     const { email, password } = req.body
-    console.log("password from body", password);
+  
+    // console.log("password from body", password);
 
     try {
         const response = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
-       
-        console.log("response:", response.rows[0]);
-        console.log("password:", response.rows[0].password);
+       console.log("response: ", response);
+        // console.log("response:", response.rows[0]);
+        // console.log("password:", response.rows[0].password);
         //2. check if user doesn't exist (if not then we throw error)
-        if(response.rows[0] == undefined){
-            return res.status(401).json("Password or Email is incorrect")
+        if(response.rowCount === 0){
+            console.log("insdie no email");
+            return res.status(405).json({message: "no email found"})
         }
         //3. check if incoming password is the same the database password
         else if(response.rows[0].password == password){
            
             console.log("login successfully")
-            res.json(response)
+            res.send("login right")
         }else{
             console.log("login credential incorrect!")
             return res.status(401).json("Password or Email is incorrect")
