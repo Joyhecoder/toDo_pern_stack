@@ -75,8 +75,8 @@ const ListAPI = () => {
         
           {recipeResult.map(recipe => {
             return (
-            <Card style={{ width: '25vw', height: '70vh', marginBottom: '1rem'}}>
-              <Card.Img variant="top" src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg" style={{  height: "25vh", objectFit: "contain"}} />
+            <Card style={{ width: '25vw', height: '70vh', marginBottom: '1rem', overflowY: "auto"}}>
+              <Card.Img variant="top" src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg" style={{  height: "35vh", objectFit: "fill"}} />
               <Card.Body>
                 <Card.Title>{recipe.name}</Card.Title>
                 <Card.Text>
