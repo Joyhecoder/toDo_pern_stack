@@ -1,3 +1,5 @@
+
+
 /* styles for Register component */
 .register-body {
     background-color:#6b9080;
@@ -99,4 +101,53 @@ form {
     margin-top: 8%;
     
 }
+
+
+/* styles for ListAPI */
+.onlySearch {
+   
+    
+}
+
+.search-container {
+    height: 98vh;
+    display: flex;
+    background-color:  #c7dfd2;
+    justify-content: center;
+    align-items: center;
+}
+.search-container2 {
+    background-color:  #c7dfd2;
+}
+
+.searchBar {
+    background-color: green;
+    width: 60vw;
+    margin-right: 10px;
+    border-radius: 10%;
+}
+
+.searchBtt {
+    background-color: #a4c3b2;
+    color: #242423;
+    font-weight: bold;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem;
+
+}
+
+.recipe-container {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
 
