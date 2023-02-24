@@ -14,7 +14,7 @@ const ListAPI = () => {
     let inputArray = inputField.split(" ")
     // console.log(inputArray);
     let input = inputArray.join("%20")
-    // console.log(input)
+    console.log(input)
     const options = {
       method: 'GET',
       headers: {
@@ -23,9 +23,30 @@ const ListAPI = () => {
       }
     };
     try {
+      //drink data fetch
       let response = await fetch(`https://cocktail-by-api-ninjas.p.rapidapi.com/v1/cocktail?name=${input}`, options)
       let data = await response.json()
-      console.log(data)
+      // console.log(data)
+
+      //img api fetch
+      let responseImg = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`)
+      let dataImg = await responseImg.json()
+      console.log("Image", dataImg.drinks)
+
+      //store img info into each drink data
+     
+      for(let i=0; i <data.length; i++){
+        if(i < dataImg.length ){
+          data[i].img = dataImg.drinks[i].strDrinkThumb
+        }else{
+          // console.log(dataImg.drinks.length)
+          let randomNum = Math.floor(Math.random()*(dataImg.drinks.length))
+          console.log(randomNum)
+          data[i].img = dataImg.drinks[randomNum].strDrinkThumb;
+        }
+       
+      }
+      // console.log(data)
       setRecipeResult(data)
       console.log(recipeResult);
     } catch (error) {
@@ -76,7 +97,7 @@ const ListAPI = () => {
           {recipeResult.map(recipe => {
             return (
             <Card style={{ width: '25vw', height: '70vh', marginBottom: '1rem', overflowY: "auto"}}>
-              <Card.Img variant="top" src="https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg" style={{  height: "35vh", objectFit: "fill"}} />
+              <Card.Img variant="top" src={recipe.img} style={{  height: "35vh", objectFit: "fill"}} />
               <Card.Body>
                 <Card.Title>{recipe.name}</Card.Title>
                 <Card.Text>
