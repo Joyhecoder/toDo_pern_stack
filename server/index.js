@@ -60,11 +60,14 @@ app.post("/todos", async (req, res) => {
 app.post("/shoppingTodos", async (req, res) => {
     try {
         const { ingredients } = req.body;
-        // console.log("ingredient:", ingredients);
-        const convertedArraytoStr = ingredients.join(",")
-        // console.log("convert data structure:", convertedArraytoStr);
-        const ingredientsStr = "Shop for".concat(" ", convertedArraytoStr)
-        console.log(ingredientsStr);
+
+        //convert ingredients which is in array to a string
+        // const convertedArraytoStr = ingredients.join(",")
+
+        //add shop for into the string
+        const ingredientsStr = "Shop for".concat(" ", ingredients)
+       
+        //create the data into db
         const newTodos = await pool.query('INSERT INTO todo (description) VALUES ($1) RETURNING *', [ingredientsStr])
         res.json(newTodos.rows[0])
     }catch (error){
