@@ -56,6 +56,22 @@ app.post("/todos", async (req, res) => {
     }
 })
 
+//create a shopping todo
+app.post("/shoppingTodos", async (req, res) => {
+    try {
+        const { ingredients } = req.body;
+        // console.log("ingredient:", ingredients);
+        const convertedArraytoStr = ingredients.join(",")
+        // console.log("convert data structure:", convertedArraytoStr);
+        const ingredientsStr = "Shop for".concat(" ", convertedArraytoStr)
+        console.log(ingredientsStr);
+        const newTodos = await pool.query('INSERT INTO todo (description) VALUES ($1) RETURNING *', [ingredientsStr])
+        res.json(newTodos.rows[0])
+    }catch (error){
+        console.log(error)
+    }
+})
+
 //update a todo
 app.put('/todos/:id', async (req, res) => {
     try{
