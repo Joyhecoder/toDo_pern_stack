@@ -9,7 +9,7 @@ const ListAPI = () => {
   const [recipeResult, setRecipeResult] = useState([])
   const [inputField, setInputField] = useState('')
  
-  console.log(inputField)
+  // console.log(inputField)
   const apiFetch = async () => { 
     let inputArray = inputField.split(" ")
     let input = inputArray.join("%20")
@@ -25,7 +25,7 @@ const ListAPI = () => {
       //drink data fetch
       let response = await fetch(`https://cocktail-by-api-ninjas.p.rapidapi.com/v1/cocktail?name=${input}`, options)
       let data = await response.json()
- 
+      console.log(data);
 
       //img api fetch
       let responseImg = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${input}`)
@@ -40,7 +40,7 @@ const ListAPI = () => {
           data[i].img = dataImg.drinks[i].strDrinkThumb
         }else{
           let randomNum = Math.floor(Math.random()*(dataImg.drinks.length))
-          console.log(randomNum)
+          // console.log(randomNum)
           data[i].img = dataImg.drinks[randomNum].strDrinkThumb;
         }
        
