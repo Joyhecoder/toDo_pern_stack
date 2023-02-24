@@ -8,8 +8,12 @@ import "../components/css/styles.css"
 const ListAPI = () => {
   const [recipeResult, setRecipeResult] = useState([])
   const [inputField, setInputField] = useState('')
+
+
  
   // console.log(inputField)
+
+  //fetch for drinks data
   const apiFetch = async () => { 
     let inputArray = inputField.split(" ")
     let input = inputArray.join("%20")
@@ -55,6 +59,26 @@ const ListAPI = () => {
   
   const handleSearch = () => {
     apiFetch()
+  }
+
+  const handleAddtodoforShopping = async (e) => {
+    e.preventDefault()
+    try {
+      let ingredients = e.target.value
+      
+      const body = { ingredients }
+      console.log(body)
+
+      const response = await fetch('http://localhost:5000/shoppingTodos',{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(body)
+    })
+     console.log(response);
+     
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <>
@@ -113,7 +137,7 @@ const ListAPI = () => {
                 <Card.Text>
                   
                 </Card.Text>
-                <Button variant="warning">Add to Todo</Button>
+                <Button variant="warning" value={recipe.ingredients} onClick={(e)=>{handleAddtodoforShopping(e)}}>Add to Todo</Button>
               </Card.Body>
             </Card>
             )
